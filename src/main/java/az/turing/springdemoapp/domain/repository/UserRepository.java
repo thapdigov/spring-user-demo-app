@@ -9,8 +9,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
-public class UserRepository {
-
+public class UserRepository implements UserDaoInter {
     public final AtomicInteger atomicInteger = new AtomicInteger();
     private final static Set<UserEntity> USERS = new HashSet<>();
 
@@ -43,9 +42,11 @@ public class UserRepository {
                 .filter(userEntity -> userEntity.getId().equals(id))
                 .findFirst();
     }
+
     public boolean existsById(Integer id) {
         return USERS.stream().anyMatch(userentity -> userentity.getId().equals(id));
     }
+
     public void deleteById(Integer id) {
         USERS.stream().filter(userEntity -> userEntity.getId().equals(id)).findFirst().ifPresent(USERS::remove);
     }

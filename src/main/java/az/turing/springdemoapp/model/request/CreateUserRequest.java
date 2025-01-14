@@ -1,12 +1,13 @@
 package az.turing.springdemoapp.model.request;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@Getter
+@Setter
 public class CreateUserRequest {
     private String username;
     private String password;

@@ -1,16 +1,16 @@
 package az.turing.springdemoapp.domain.entity;
 
 import az.turing.springdemoapp.model.enums.UserStatus;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
     private Integer Id;
     private String name;
+    @ToString.Exclude
     private String password;
     private UserStatus userStatus;
 }
