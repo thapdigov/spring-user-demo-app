@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Validated
@@ -19,21 +20,26 @@ import java.util.Set;
 @RequiredArgsConstructor
 @RequestMapping("users/api")
 public class UserController {
-    public final UserService userservice;
+    private final UserService userservice;
 
     @GetMapping("all")
     public ResponseEntity<Set<UserDto>> getAll() {
         return ResponseEntity.ok(userservice.findAll());
     }
 
-    @PostMapping
-    public ResponseEntity<UserDto> create(@Valid @RequestBody CreateUserRequest createUserRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userservice.create(createUserRequest));
-    }
-
     @GetMapping("/{username}")
     public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
         return ResponseEntity.ok(userservice.findByUserName(username));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getById(@PathVariable Integer id) {
+        return ResponseEntity.ok(userservice.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDto> create(@Valid @RequestBody CreateUserRequest createUserRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userservice.create(createUserRequest));
     }
 
     @PatchMapping("/{id}")
